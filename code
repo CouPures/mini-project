@@ -1,0 +1,81 @@
+using System;
+
+// ArrayMin.cs
+public class ArrayMin
+{
+    public static int Min(int[] arr)
+    {
+        if (arr.Length == 0)
+        {
+            throw new ArgumentException("Array must not be empty");
+        }
+
+        int min = arr[0];
+        for (int i = 1; i < arr.Length; i++)
+        {
+            if (arr[i] < min)
+            {
+                min = arr[i];
+            }
+        }
+        return min;
+    }
+}
+
+// Employee.cs
+public class Employee
+{
+    private int id;
+    private string name;
+    private string position;
+    private double salary;
+
+    public Employee(int id, string name, string position, double salary)
+    {
+        this.id = id;
+        this.name = name;
+        this.position = position;
+        this.salary = salary;
+    }
+
+    public double CalculateBonus()
+    {
+        if (this.position.Equals("Developer"))
+        {
+            return Math.Max(50000, this.salary * 0.20);
+        }
+        else if (this.position.Equals("Manager"))
+        {
+            return Math.Max(50000, this.salary * 0.25);
+        }
+        else
+        {
+            return 50000; // For other positions, fixed bonus of 50000
+        }
+    }
+
+    public override string ToString()
+    {
+        return "ID: " + id + ", Name: " + name + ", Position: " + position + ", Salary: " + salary +
+                ", Bonus: " + CalculateBonus();
+    }
+}
+
+// PayCalc.cs
+public class PayCalc
+{
+    public static void Main(string[] args)
+    {
+        int[] numbers = { 45, 25, 67, 12, 93 };
+        int min = ArrayMin.Min(numbers);
+        Console.WriteLine("Minimum value in the array: " + min);
+
+        Employee developer = new Employee(1, "Enes Çelen", "Developer", 70000);
+        Employee manager = new Employee(2, "Kerem Ensar", "Manager", 60000);
+        Employee otherEmployee = new Employee(3, "Büşra Ceren", "Other", 90000);
+
+        Console.WriteLine("Developer: " + developer);
+        Console.WriteLine("Manager: " + manager);
+        Console.WriteLine("Other Employee: " + otherEmployee);
+    }
+}
